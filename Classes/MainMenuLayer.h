@@ -23,29 +23,29 @@ public:
 	
 protected:
 	
-	/** Init the fishes */
-	void fishActorsInital();
-	
-	/** Create Bubble */
-	ParticleSystemQuad* createPaopao(Point position);
-	
-	/** Callback func when touch the startgame button */
-	void startGameEvent(Ref* sender);
-	
-	/** Callback func when touch the select scne button */
-	void sceneChoose(Ref* sender);
-	
-	/** Callback func when the fish need to turn back */
-	void turnBack(Node* sender);
-	
-	/** Callback func when the fish need to turn back */
-	void marlinTurnBack(Node* sender);
-	
-	/** Create the action of fish and return */
-	ActionInterval* createFishMoveAction(FishActor* fish);
-		
-	/** Create the action of marlin and return */
-	ActionInterval* createMarlinMoveAction(MarlinsFishActor* fish);
+//	/** Init the fishes */
+//	void fishActorsInital();
+//	
+//	/** Create Bubble */
+//	ParticleSystemQuad* createPaopao(Point position);
+//	
+//	/** Callback func when touch the startgame button */
+//	void startGameEvent(Ref* sender);
+//	
+//	/** Callback func when touch the select scne button */
+//	void sceneChoose(Ref* sender);
+//	
+//	/** Callback func when the fish need to turn back */
+//	void turnBack(Node* sender);
+//	
+//	/** Callback func when the fish need to turn back */
+//	void marlinTurnBack(Node* sender);
+//	
+//	/** Create the action of fish and return */
+//	ActionInterval* createFishMoveAction(FishActor* fish);
+//		
+//	/** Create the action of marlin and return */
+//	ActionInterval* createMarlinMoveAction(MarlinsFishActor* fish);
 };
 
 

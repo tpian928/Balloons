@@ -18,6 +18,7 @@
 
 bool MainMenuLayer::init(){
 	
+
 	//Get the windows size
 	auto winSize = Director::getInstance()->getWinSize();
 	
@@ -26,65 +27,63 @@ bool MainMenuLayer::init(){
 	ui_background->setAnchorPoint(Point(0.0f,0.0f));
 	ui_background->setPosition(Point(0.0f,0.0f));
 	addChild(ui_background,0.0f);
+    
 	
-	//Set game logo
-	auto ui_Logo = Sprite::create("MainMenu/main_ui_title_cn-hd.png");
-	ui_Logo->setPosition(Point(winSize.width/2.0f, winSize.height/1.35f));
-	addChild(ui_Logo,2);
-	
-	//Read the texture to sprite frame cache
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("MainMenu/UI_GameMenuText_cn-hd.plist");
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("MainMenu/UI_GameStartMenuLayer-hd.plist");
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("MainMenu/FishActor-Small-hd.plist");
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("MainMenu/FishActor-Marlin-hd.plist");
+	// //Set game logo
+	// auto ui_Logo = Sprite::create("MainMenu/main_ui_title_cn-hd.png");
+	// ui_Logo->setPosition(Point(winSize.width/2.0f, winSize.height/1.35f));
+	// addChild(ui_Logo,2);
 	
 	//Create the start button of the game
-	auto startGameBtn = Sprite::createWithSpriteFrameName("ui_button_box02_02.png");
-	auto startGameBtnPush = Sprite::createWithSpriteFrameName("ui_button_box02_01.png");
-	auto startGameFont = Sprite::createWithSpriteFrameName("ui_2p_010.png");
-	
-	//Create the scene choose button
-	auto sceneChooseBtn = Sprite::createWithSpriteFrameName("ui_button_box01_02.png");
-	auto sceneChooseBtnPush = Sprite::createWithSpriteFrameName("ui_button_box01_01.png");
-	auto sceneChooseFont = Sprite::createWithSpriteFrameName("button_other_014.png");
-	
-	//Create the menu
-	auto startGameMenuItem = MenuItemSprite::create(startGameBtn, startGameBtnPush, CC_CALLBACK_1(MainMenuLayer::startGameEvent, this));
-	auto sceneChooseMenuItem = MenuItemSprite::create(sceneChooseBtn, sceneChooseBtnPush, CC_CALLBACK_1(MainMenuLayer::sceneChoose, this));
-	sceneChooseMenuItem->setPosition(Point(startGameMenuItem->getPosition().x, startGameMenuItem->getPosition().y-140));
-	auto startGameMenu = Menu::create(startGameMenuItem, sceneChooseMenuItem, NULL);
-	
-	//Set the posiiton of menu
-	startGameMenu->setPosition(Point(ui_Logo->getPosition().x, ui_Logo->getPosition().y-230));
-	startGameFont->setPosition(Point(ui_Logo->getPosition().x, ui_Logo->getPosition().y-220));
-	sceneChooseFont->setPosition(Point(ui_Logo->getPosition().x, ui_Logo->getPosition().y-370));
-	
-	//Add the menu into the scene
-	addChild(startGameMenu,2);
-	addChild(startGameFont,3);
-	addChild(sceneChooseFont,3);
-	
-	//Create the bubble on the lower left corner
-	auto paopaoLeft = createPaopao(Point(0,0));
-	addChild(paopaoLeft,4);
-	
-	//Create the bubble on the lower right corner
-	auto paopaoRight = createPaopao(Point(winSize.width, 0));
-	addChild(paopaoRight,4);
-		
-	//Init the fishes
-	fishActorsInital();
-	
-	unscheduleUpdate();
-	
-    /**Preload background music
-       set default volume
-	   Play background music.**/
-    CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(BG_MUSIC);
-    CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.5);
-	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(BG_MUSIC, true);
-	
+	auto startGameBtn = Sprite::create("MainMenu/play_btn.png");
+    startGameBtn->setScale(0.5);
+    int height = startGameBtn->getBoundingBox().height;
+	startGameBtn->setPosition(Point(winSize.width/2,));
+	addChild(startGameBtn,1.0f);
+//	
+//	//Create the scene choose button
+//	auto sceneChooseBtn = Sprite::createWithSpriteFrameName("ui_button_box01_02.png");
+//	auto sceneChooseBtnPush = Sprite::createWithSpriteFrameName("ui_button_box01_01.png");
+//	auto sceneChooseFont = Sprite::createWithSpriteFrameName("button_other_014.png");
+//	
+//	//Create the menu
+//	auto startGameMenuItem = MenuItemSprite::create(startGameBtn, startGameBtnPush, CC_CALLBACK_1(MainMenuLayer::startGameEvent, this));
+//	auto sceneChooseMenuItem = MenuItemSprite::create(sceneChooseBtn, sceneChooseBtnPush, CC_CALLBACK_1(MainMenuLayer::sceneChoose, this));
+//	sceneChooseMenuItem->setPosition(Point(startGameMenuItem->getPosition().x, startGameMenuItem->getPosition().y-140));
+//	auto startGameMenu = Menu::create(startGameMenuItem, sceneChooseMenuItem, NULL);
+//	
+//	//Set the posiiton of menu
+//	startGameMenu->setPosition(Point(ui_Logo->getPosition().x, ui_Logo->getPosition().y-230));
+//	startGameFont->setPosition(Point(ui_Logo->getPosition().x, ui_Logo->getPosition().y-220));
+//	sceneChooseFont->setPosition(Point(ui_Logo->getPosition().x, ui_Logo->getPosition().y-370));
+//	
+//	//Add the menu into the scene
+//	addChild(startGameMenu,2);
+//	addChild(startGameFont,3);
+//	addChild(sceneChooseFont,3);
+//	
+//	//Create the bubble on the lower left corner
+//	auto paopaoLeft = createPaopao(Point(0,0));
+//	addChild(paopaoLeft,4);
+//	
+//	//Create the bubble on the lower right corner
+//	auto paopaoRight = createPaopao(Point(winSize.width, 0));
+//	addChild(paopaoRight,4);
+//		
+//	//Init the fishes
+//	fishActorsInital();
+//	
+//	unscheduleUpdate();
+//	
+//    /**Preload background music
+//       set default volume
+//	   Play background music.**/
+//    CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(BG_MUSIC);
+//    CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.5);
+//	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(BG_MUSIC, true);
+//	
 	return true;
+
 }
 
 //void MainMenuLayer::fishActorsInital(){

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		027850431CC4C90400ADD315 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027850421CC4C90400ADD315 /* AppDelegate.cpp */; };
 		02D46D4B1CC3214C0064F68B /* MainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D46D401CC3214C0064F68B /* MainMenuScene.cpp */; };
 		02D46D4C1CC3214C0064F68B /* MainMenuLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D46D421CC3214C0064F68B /* MainMenuLayer.cpp */; };
 		02D46D5A1CC321690064F68B /* res in Resources */ = {isa = PBXBuildFile; fileRef = 02D46D511CC321690064F68B /* res */; };
@@ -69,6 +70,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		027850411CC4C90400ADD315 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		027850421CC4C90400ADD315 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		02D46D3F1CC3214C0064F68B /* MainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuScene.h; sourceTree = "<group>"; };
 		02D46D401CC3214C0064F68B /* MainMenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenuScene.cpp; sourceTree = "<group>"; };
 		02D46D411CC3214C0064F68B /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
@@ -264,6 +267,8 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				027850411CC4C90400ADD315 /* AppDelegate.h */,
+				027850421CC4C90400ADD315 /* AppDelegate.cpp */,
 				02D46D3F1CC3214C0064F68B /* MainMenuScene.h */,
 				02D46D401CC3214C0064F68B /* MainMenuScene.cpp */,
 				02D46D411CC3214C0064F68B /* MainMenuLayer.h */,
@@ -453,6 +458,7 @@
 			files = (
 				02D46D4C1CC3214C0064F68B /* MainMenuLayer.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				027850431CC4C90400ADD315 /* AppDelegate.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				02D46D4B1CC3214C0064F68B /* MainMenuScene.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
