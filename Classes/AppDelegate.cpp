@@ -1,6 +1,5 @@
 #include "AppDelegate.h"
 #include "MainMenuScene.h"
-#include "FishingScene.h"
 USING_NS_CC;
 
 AppDelegate::AppDelegate() {
@@ -27,11 +26,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLViewImpl::createWithRect("HelloCpp", Rect(0, 0, 960, 640));
+        printf("aaaa");
+        glview = GLViewImpl::createWithRect("HelloCpp", Rect(0, 0, 640, 960));
         director->setOpenGLView(glview);
     }
-
-    director->getOpenGLView()->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
+    
+    printf("bbbb");
+    director->getOpenGLView()->setDesignResolutionSize(640,960, ResolutionPolicy::SHOW_ALL);
 
     // turn on display FPS
     director->setDisplayStats(true);
