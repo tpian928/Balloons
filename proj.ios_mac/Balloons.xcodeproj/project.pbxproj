@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		02D46D4B1CC3214C0064F68B /* MainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D46D401CC3214C0064F68B /* MainMenuScene.cpp */; };
 		02D46D4C1CC3214C0064F68B /* MainMenuLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D46D421CC3214C0064F68B /* MainMenuLayer.cpp */; };
-		02D46D4D1CC3214C0064F68B /* FishingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D46D441CC3214C0064F68B /* FishingScene.cpp */; };
-		02D46D4E1CC3214C0064F68B /* FishingLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D46D461CC3214C0064F68B /* FishingLayer.cpp */; };
-		02D46D4F1CC3214C0064F68B /* FishActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D46D481CC3214C0064F68B /* FishActor.cpp */; };
-		02D46D501CC3214C0064F68B /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D46D4A1CC3214C0064F68B /* AppDelegate.cpp */; };
 		02D46D5A1CC321690064F68B /* res in Resources */ = {isa = PBXBuildFile; fileRef = 02D46D511CC321690064F68B /* res */; };
 		02D46D5B1CC321690064F68B /* MainMenu in Resources */ = {isa = PBXBuildFile; fileRef = 02D46D521CC321690064F68B /* MainMenu */; };
 		02D46D5C1CC321690064F68B /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D46D531CC321690064F68B /* HelloWorld.png */; };
@@ -77,14 +73,6 @@
 		02D46D401CC3214C0064F68B /* MainMenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenuScene.cpp; sourceTree = "<group>"; };
 		02D46D411CC3214C0064F68B /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
 		02D46D421CC3214C0064F68B /* MainMenuLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenuLayer.cpp; sourceTree = "<group>"; };
-		02D46D431CC3214C0064F68B /* FishingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishingScene.h; sourceTree = "<group>"; };
-		02D46D441CC3214C0064F68B /* FishingScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FishingScene.cpp; sourceTree = "<group>"; };
-		02D46D451CC3214C0064F68B /* FishingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishingLayer.h; sourceTree = "<group>"; };
-		02D46D461CC3214C0064F68B /* FishingLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FishingLayer.cpp; sourceTree = "<group>"; };
-		02D46D471CC3214C0064F68B /* FishActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishActor.h; sourceTree = "<group>"; };
-		02D46D481CC3214C0064F68B /* FishActor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FishActor.cpp; sourceTree = "<group>"; };
-		02D46D491CC3214C0064F68B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		02D46D4A1CC3214C0064F68B /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		02D46D511CC321690064F68B /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
 		02D46D521CC321690064F68B /* MainMenu */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MainMenu; sourceTree = "<group>"; };
 		02D46D531CC321690064F68B /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
@@ -280,14 +268,6 @@
 				02D46D401CC3214C0064F68B /* MainMenuScene.cpp */,
 				02D46D411CC3214C0064F68B /* MainMenuLayer.h */,
 				02D46D421CC3214C0064F68B /* MainMenuLayer.cpp */,
-				02D46D431CC3214C0064F68B /* FishingScene.h */,
-				02D46D441CC3214C0064F68B /* FishingScene.cpp */,
-				02D46D451CC3214C0064F68B /* FishingLayer.h */,
-				02D46D461CC3214C0064F68B /* FishingLayer.cpp */,
-				02D46D471CC3214C0064F68B /* FishActor.h */,
-				02D46D481CC3214C0064F68B /* FishActor.cpp */,
-				02D46D491CC3214C0064F68B /* AppDelegate.h */,
-				02D46D4A1CC3214C0064F68B /* AppDelegate.cpp */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -472,13 +452,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				02D46D4C1CC3214C0064F68B /* MainMenuLayer.cpp in Sources */,
-				02D46D4F1CC3214C0064F68B /* FishActor.cpp in Sources */,
-				02D46D501CC3214C0064F68B /* AppDelegate.cpp in Sources */,
-				02D46D4D1CC3214C0064F68B /* FishingScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				02D46D4B1CC3214C0064F68B /* MainMenuScene.cpp in Sources */,
-				02D46D4E1CC3214C0064F68B /* FishingLayer.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,7 +9,6 @@
 #include "MainMenuScene.h"
 #include "MainMenuLayer.h"
 
-
 Scene* MainMenuScene::createScene()
 {
     // 'scene' is an autorelease object

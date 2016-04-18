@@ -87,108 +87,108 @@ bool MainMenuLayer::init(){
 	return true;
 }
 
-void MainMenuLayer::fishActorsInital(){
-	
-	//Get the window size
-	auto winSize = Director::getInstance()->getWinSize();
-	
-	//Create fishes
-	for (int fishIndex=0; fishIndex<7; fishIndex++) {
-
-		auto smallFishActor = FishActor::createWithType(FishActor::FishActorType::SmallFish);
-		auto angelFishActor = FishActor::createWithType(FishActor::FishActorType::AngelFish);
-		auto croakerFishActor = FishActor::createWithType(FishActor::FishActorType::Croaker);
-		auto amphiprionFishActor = FishActor::createWithType(FishActor::FishActorType::Bream);
-		auto breamFishActor = FishActor::createWithType(FishActor::FishActorType::SmallFish);
-		
-		//Set the position of the fishes like a matrix
-		smallFishActor->setPosition(Point(2000-winSize.width/10*(fishIndex+1),winSize.height-winSize.height/6));
-		angelFishActor->setPosition(Point(2000-winSize.width/10*(fishIndex+1),winSize.height-winSize.height/6*2));
-		croakerFishActor->setPosition(Point(2000-winSize.width/10*(fishIndex+1),winSize.height-winSize.height/6*3));
-		amphiprionFishActor->setPosition(Point(2000-winSize.width/10*(fishIndex+1),winSize.height-winSize.height/6*4));
-		breamFishActor->setPosition(Point(2000-winSize.width/10*(fishIndex+1),winSize.height-winSize.height/6*5));
-		
-		smallFishActor->runAction(createFishMoveAction(smallFishActor));
-		angelFishActor->runAction(createFishMoveAction(angelFishActor));
-		croakerFishActor->runAction(createFishMoveAction(croakerFishActor));
-		amphiprionFishActor->runAction(createFishMoveAction(amphiprionFishActor));
-		breamFishActor->runAction(createFishMoveAction(breamFishActor));
-
-		
-		//Add the fishes into the scene
-		addChild(smallFishActor,1);
-		addChild(angelFishActor,1);
-		addChild(croakerFishActor,1);
-		addChild(amphiprionFishActor,1);
-		addChild(breamFishActor,1);
-	}
-	
-	auto marlin = FishActor::createWithType(FishActor::FishActorType::MarlinsFish);
-	marlin->setVisible(false);
-	marlin->setPosition(Point(1000, winSize.height/2));
-	marlin->runAction(MainMenuLayer::createMarlinMoveAction((MarlinsFishActor*)marlin));
-	addChild(marlin, 1);
-}
-
-void MainMenuLayer::startGameEvent(Ref* sender){
-
-	//Create the scene of FishingScene with a transtionFadeBL effect
-	auto replaceScene = TransitionFade::create(2.0, FishingScene::createScene());
-	
-	//Replace the scene with the trasition effect scene
-	Director::getInstance()->replaceScene(replaceScene);
-}
-
-void MainMenuLayer::sceneChoose(Ref* sender){
-		
-}
-
-ParticleSystemQuad* MainMenuLayer::createPaopao(Point position){
-	
-	//Create the paraticle of bubble
-	auto paopao = ParticleSystemQuad::create("MainMenu/lizhi_qipao.plist");
-	
-	//Set the bubble position type form the ground
-	paopao->setPositionType(ParticleSystemQuad::PositionType::GROUPED);
-	
-	paopao->setPosition(position);
-	paopao->setScale(2.0f);
-	
-	return paopao;
-}
-
-void MainMenuLayer::turnBack(Node* sender){
-	
-	if(sender->getRotation()==0.0f){
-		
-		sender->setRotation(180.00f);
-	}else {
-		
-		sender->setRotation(0.00f);
-	}
-}
-
-void MainMenuLayer::marlinTurnBack(Node *sender){
-	
-	if(sender->getRotation()==0.0f){
-		
-		sender->setVisible(true);
-		sender->setRotation(180.00f);
-	}else {
-		
-		sender->setVisible(false);
-		sender->setRotation(0.00f);
-	}
-}
-
-ActionInterval* MainMenuLayer::createFishMoveAction(FishActor *fish){
-	
-	//Let the matrix of fishes move back and forth
-	return RepeatForever::create(Sequence::create(MoveTo::create(12, Point(fish->getPositionX()-1300, fish->getPositionY())),CallFunc::create(CC_CALLBACK_0(MainMenuLayer::turnBack,this,fish)),MoveTo::create(8, Point(fish->getPositionX()+1000,fish->getPositionY())),CallFunc::create(CC_CALLBACK_0(MainMenuLayer::turnBack,this,fish)), NULL));
-}
-
-ActionInterval* MainMenuLayer::createMarlinMoveAction(MarlinsFishActor *fish){
-	
-	//Let the marlin fis move behind the matrix of fishes
-	return RepeatForever::create(Sequence::create(MoveTo::create(12, Point(fish->getPositionX()-1300, fish->getPositionY())),CallFunc::create(CC_CALLBACK_0(MainMenuLayer::marlinTurnBack,this,fish)),MoveTo::create(8, Point(fish->getPositionX()+1000,fish->getPositionY())),CallFunc::create(CC_CALLBACK_0(MainMenuLayer::marlinTurnBack,this,fish)), NULL));
-}
+//void MainMenuLayer::fishActorsInital(){
+//	
+//	//Get the window size
+//	auto winSize = Director::getInstance()->getWinSize();
+//	
+//	//Create fishes
+//	for (int fishIndex=0; fishIndex<7; fishIndex++) {
+//
+//		auto smallFishActor = FishActor::createWithType(FishActor::FishActorType::SmallFish);
+//		auto angelFishActor = FishActor::createWithType(FishActor::FishActorType::AngelFish);
+//		auto croakerFishActor = FishActor::createWithType(FishActor::FishActorType::Croaker);
+//		auto amphiprionFishActor = FishActor::createWithType(FishActor::FishActorType::Bream);
+//		auto breamFishActor = FishActor::createWithType(FishActor::FishActorType::SmallFish);
+//		
+//		//Set the position of the fishes like a matrix
+//		smallFishActor->setPosition(Point(2000-winSize.width/10*(fishIndex+1),winSize.height-winSize.height/6));
+//		angelFishActor->setPosition(Point(2000-winSize.width/10*(fishIndex+1),winSize.height-winSize.height/6*2));
+//		croakerFishActor->setPosition(Point(2000-winSize.width/10*(fishIndex+1),winSize.height-winSize.height/6*3));
+//		amphiprionFishActor->setPosition(Point(2000-winSize.width/10*(fishIndex+1),winSize.height-winSize.height/6*4));
+//		breamFishActor->setPosition(Point(2000-winSize.width/10*(fishIndex+1),winSize.height-winSize.height/6*5));
+//		
+//		smallFishActor->runAction(createFishMoveAction(smallFishActor));
+//		angelFishActor->runAction(createFishMoveAction(angelFishActor));
+//		croakerFishActor->runAction(createFishMoveAction(croakerFishActor));
+//		amphiprionFishActor->runAction(createFishMoveAction(amphiprionFishActor));
+//		breamFishActor->runAction(createFishMoveAction(breamFishActor));
+//
+//		
+//		//Add the fishes into the scene
+//		addChild(smallFishActor,1);
+//		addChild(angelFishActor,1);
+//		addChild(croakerFishActor,1);
+//		addChild(amphiprionFishActor,1);
+//		addChild(breamFishActor,1);
+//	}
+//	
+//	auto marlin = FishActor::createWithType(FishActor::FishActorType::MarlinsFish);
+//	marlin->setVisible(false);
+//	marlin->setPosition(Point(1000, winSize.height/2));
+//	marlin->runAction(MainMenuLayer::createMarlinMoveAction((MarlinsFishActor*)marlin));
+//	addChild(marlin, 1);
+//}
+//
+//void MainMenuLayer::startGameEvent(Ref* sender){
+//
+//	//Create the scene of FishingScene with a transtionFadeBL effect
+//	auto replaceScene = TransitionFade::create(2.0, FishingScene::createScene());
+//	
+//	//Replace the scene with the trasition effect scene
+//	Director::getInstance()->replaceScene(replaceScene);
+//}
+//
+//void MainMenuLayer::sceneChoose(Ref* sender){
+//		
+//}
+//
+//ParticleSystemQuad* MainMenuLayer::createPaopao(Point position){
+//	
+//	//Create the paraticle of bubble
+//	auto paopao = ParticleSystemQuad::create("MainMenu/lizhi_qipao.plist");
+//	
+//	//Set the bubble position type form the ground
+//	paopao->setPositionType(ParticleSystemQuad::PositionType::GROUPED);
+//	
+//	paopao->setPosition(position);
+//	paopao->setScale(2.0f);
+//	
+//	return paopao;
+//}
+//
+//void MainMenuLayer::turnBack(Node* sender){
+//	
+//	if(sender->getRotation()==0.0f){
+//		
+//		sender->setRotation(180.00f);
+//	}else {
+//		
+//		sender->setRotation(0.00f);
+//	}
+//}
+//
+//void MainMenuLayer::marlinTurnBack(Node *sender){
+//	
+//	if(sender->getRotation()==0.0f){
+//		
+//		sender->setVisible(true);
+//		sender->setRotation(180.00f);
+//	}else {
+//		
+//		sender->setVisible(false);
+//		sender->setRotation(0.00f);
+//	}
+//}
+//
+//ActionInterval* MainMenuLayer::createFishMoveAction(FishActor *fish){
+//	
+//	//Let the matrix of fishes move back and forth
+//	return RepeatForever::create(Sequence::create(MoveTo::create(12, Point(fish->getPositionX()-1300, fish->getPositionY())),CallFunc::create(CC_CALLBACK_0(MainMenuLayer::turnBack,this,fish)),MoveTo::create(8, Point(fish->getPositionX()+1000,fish->getPositionY())),CallFunc::create(CC_CALLBACK_0(MainMenuLayer::turnBack,this,fish)), NULL));
+//}
+//
+//ActionInterval* MainMenuLayer::createMarlinMoveAction(MarlinsFishActor *fish){
+//	
+//	//Let the marlin fis move behind the matrix of fishes
+//	return RepeatForever::create(Sequence::create(MoveTo::create(12, Point(fish->getPositionX()-1300, fish->getPositionY())),CallFunc::create(CC_CALLBACK_0(MainMenuLayer::marlinTurnBack,this,fish)),MoveTo::create(8, Point(fish->getPositionX()+1000,fish->getPositionY())),CallFunc::create(CC_CALLBACK_0(MainMenuLayer::marlinTurnBack,this,fish)), NULL));
+//}

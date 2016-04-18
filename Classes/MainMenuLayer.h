@@ -6,8 +6,8 @@
 //
 //
 #include "MainMenuScene.h"
-#include "FishActor.h"
-#include "FishingScene.h"
+//#include "FishActor.h"
+//#include "FishingScene.h"
 
 #ifndef FishJoyMini_MainMenuLayer_h
 #define FishJoyMini_MainMenuLayer_h
