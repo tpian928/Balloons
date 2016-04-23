@@ -29,9 +29,10 @@ protected:
 //	/** Create Bubble */
 //	ParticleSystemQuad* createPaopao(Point position);
 //	
-//	/** Callback func when touch the startgame button */
-//	void startGameEvent(Ref* sender);
-//	
+	/** Callback func when touch the startgame button */
+	void startGame(Ref* sender);
+
+//
 //	/** Callback func when touch the select scne button */
 //	void sceneChoose(Ref* sender);
 //	
@@ -46,6 +47,8 @@ protected:
 //		
 //	/** Create the action of marlin and return */
 //	ActionInterval* createMarlinMoveAction(MarlinsFishActor* fish);
+    
+
 };
 
 
