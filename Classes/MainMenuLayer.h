@@ -8,7 +8,7 @@
 #include "MainMenuScene.h"
 //#include "FishActor.h"
 //#include "FishingScene.h"
-
+#include "ClickBalloonScene.h"
 #ifndef FishJoyMini_MainMenuLayer_h
 #define FishJoyMini_MainMenuLayer_h
 USING_NS_CC;
