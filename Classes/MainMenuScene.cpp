@@ -1,10 +1,6 @@
 ﻿//
 //  MainMenuScene.cpp
-//  FishJoyMini
-//
-//  Created by Ken on 14-3-6.
-//
-//
+// 
 
 #include "MainMenuScene.h"
 #include "MainMenuLayer.h"

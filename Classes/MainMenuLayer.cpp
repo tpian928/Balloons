@@ -1,11 +1,6 @@
 ﻿//
 //  MainMenuLayer.cpp
-//  FishJoyMini
-//
-//  Created by Ken on 14-3-6.
-//
-//
-
+//  
 #include "MainMenuLayer.h"
 #include "SimpleAudioEngine.h"
 #include "ui/CocosGUI.h"
@@ -34,10 +29,17 @@ bool MainMenuLayer::init(){
     startGameBtn->setScale(0.5);
 	startGameBtn->setPosition(Point(winSize.width/2,100));
     startGameBtn->addTouchEventListener([&](Ref* sender,cocos2d::ui::Widget::TouchEventType type){
+
+		//Create the scene of BalloonScene with a transtionFadeBL effect
+		auto replaceScene = TransitionFade::create(2.0, ClickBalloonScene::createScene());
+
+		//Replace the scene with the trasition effect scene
+		Director::getInstance()->replaceScene(replaceScene);
         switch (type) {
             case cocos2d::ui::Widget::TouchEventType::BEGAN:
                 //TODO:Start game hereg
                 printf("click here");
+				
                 break;
             default:
                 break;

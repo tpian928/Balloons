@@ -1,10 +1,6 @@
 ﻿//
 //  MainMenuScene.h
-//  FishJoyMini
-//
-//  Created by Ken on 14-3-6.
-//
-//
+//  
 #include "cocos2d.h"
 
 #ifndef FishJoyMini_MainMenuScene_h
