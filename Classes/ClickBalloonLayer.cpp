@@ -1,33 +1,8 @@
 //
-//  FishingLayer.cpp
-//  FishJoyMini
-//
-//  Created by Ken on 14-3-11.
-//
+//  ClickBalloonLayer.cpp
 //
 
 #include "ClickBalloonLayer.h"
-
-// android effect only support ogg
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-#define SOUND_COIN        "Audio/sound_coin.ogg"
-#else
-#define SOUND_COIN        "Audio/sound_coin.mp3"
-#endif // CC_PLATFOR_ANDROID
-
-// android effect only support ogg
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-#define SOUND_FIRE        "Audio/sound_fire.ogg"
-#else
-#define SOUND_FIRE        "Audio/sound_fire.mp3"
-#endif // CC_PLATFOR_ANDROID
-
-#define FISH_LAYER_ORDER    1
-#define BULLET_LAYRE_ORDER  2
-#define UI_LAYER_ORDER      2
-#define CANNON_LAYER_ORDER  3
-
-
 bool ClickBalloonLayer::init(){
 
 	Layer::init();
@@ -39,19 +14,30 @@ bool ClickBalloonLayer::init(){
 	background->setPosition(Point(0, 0));
 	background->setTag(101);
 	addChild(background, 0);
-
-	//Read the texture to sprite frame cache
-	//SpriteFrameCache::getInstance()->addSpriteFramesWithFile("CocoStudioRes/cannon-hd.plist");
-	//SpriteFrameCache::getInstance()->addSpriteFramesWithFile("GameScene/Item-chaojiwuqi-iphone-hd.plist");
-	//SpriteFrameCache::getInstance()->addSpriteFramesWithFile("CocoStudioRes/UI_GameMenuLayer-hd.plist");
-
-
 	createBasicUI();
 
-	//Get the instance of cannon
-	//cannon = Sprite::createWithSpriteFrameName("actor_cannon1_72.png");
-	//cannon->setPosition(480, 50);
-	//addChild(cannon, CANNON_LAYER_ORDER);
+	return true;
+}
+
+void ClickBalloonLayer::createBasicUI()
+{
+	score = 0;
+	time = 3;
+	balloonClickSum = 0;
+	speed = 0;
+	miss = 0;
+	gamebar = Sprite::create("gamebar.png");
+	gamebar->setPosition(320, 925);
+	addChild(gamebar);
+	scoreLabel = Label::createWithTTF("score:0", "fonts/BuxtonSketch.ttf", 40);
+	scoreLabel->setPosition(100, 930);
+	addChild(scoreLabel);
+	timeLabel = Label::createWithTTF("time:100", "fonts/BuxtonSketch.ttf", 40);
+	timeLabel->setPosition(320, 930);
+	addChild(timeLabel);
+	balloonClickSumLabel = Label::createWithTTF("hits:0", "fonts/BuxtonSketch.ttf", 40);
+	balloonClickSumLabel->setPosition(540, 930);
+	addChild(balloonClickSumLabel);
 
 	//Add the touch event callback function
 	EventListenerTouchOneByOne * listener = EventListenerTouchOneByOne::create();
@@ -62,60 +48,10 @@ bool ClickBalloonLayer::init(){
 	listener->onTouchEnded = CC_CALLBACK_2(ClickBalloonLayer::onTouchEnded, this);
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-	schedule(schedule_selector(ClickBalloonLayer::updateBalloon), 1.0f);
-	//三秒之后执行计数器
+	this->scheduleUpdate();
+	schedule(schedule_selector(ClickBalloonLayer::updateBalloon), 0.2f);
+
 	schedule(schedule_selector(ClickBalloonLayer::updateTimeLabel), 1.0f);
-	//Activate update
-	//scheduleUpdate();
-
-	//Init the fishes
-	//fishActorsInital();
-
-	//Update the fishes one time
-	//updateFishMovement();
-
-	//Preload background effect
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(SOUND_COIN);
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(SOUND_FIRE);
-	return true;
-}
-
-void ClickBalloonLayer::createBasicUI()
-{
-	////create UI
-	//Sprite *boardBottom = Sprite::createWithSpriteFrameName("ui_box_02.png");
-	//boardBottom->setPosition(480, 41);
-	//addChild(boardBottom, UI_LAYER_ORDER);
-
-	//Sprite *boardTop = Sprite::createWithSpriteFrameName("ui_box_01.png");
-	//boardTop->setPosition(480, 578);
-	//addChild(boardTop, UI_LAYER_ORDER);
-
-	////Get the instantce of ui_box_01_01 and make it rotate forever
-	//Sprite * wheelSpr = Sprite::createWithSpriteFrameName("ui_box_01_01.png");
-	//addChild(wheelSpr, UI_LAYER_ORDER);
-	//wheelSpr->setPosition(Point(480, 578));
-	//wheelSpr->runAction(RepeatForever::create((RotateBy::create(3, 360, 360))));
-
-	////Get the instance of label of score
-	//scoreLabel = Label::createWithTTF("00000", "fonts/Marker Felt.ttf", 24);
-	//scoreLabel->setPosition(242, 28);
-	//addChild(scoreLabel, UI_LAYER_ORDER);
-	score = 0;
-	time = 100;
-	round = 1;
-	gamebar = Sprite::create("gamebar.png");
-	gamebar->setPosition(320, 925);
-	addChild(gamebar, UI_LAYER_ORDER);
-	scoreLabel = Label::createWithTTF("score:0", "fonts/BuxtonSketch.ttf", 40);
-	scoreLabel->setPosition(100, 930);
-	addChild(scoreLabel, UI_LAYER_ORDER);
-	timeLabel = Label::createWithTTF("time:100", "fonts/BuxtonSketch.ttf", 40);
-	timeLabel->setPosition(320, 930);
-	addChild(timeLabel, UI_LAYER_ORDER);
-	roundLabel = Label::createWithTTF("round:1", "fonts/BuxtonSketch.ttf", 40);
-	roundLabel->setPosition(540, 930);
-	addChild(roundLabel, UI_LAYER_ORDER);
 	
 }
 
@@ -146,40 +82,35 @@ void ClickBalloonLayer::onTouchEnded(Touch *touch, Event *unused_event)
 
 }
 void ClickBalloonLayer::update(float delta){
-
 	//Update the movement of fishes by their speed, limit the move area of the fishes
 	for (auto balloon : ballActors){
 
 		if (balloon->getPositionX()<0){
-
+			miss++;
 			removeBallon(balloon);
 		}
 		else if (balloon->getPositionX()>640){
-
+			miss++;
 			removeBallon(balloon);
 		}
-		else if (balloon->getPositionY()>1000){
-
+		else if (balloon->getPositionY()>900){
+			log("remove overarea");
+			miss++;
 			removeBallon(balloon);
 		}
 		else if (balloon->getPositionY()<-100){
-
+			miss++;
 			removeBallon(balloon);
 		}
 		
 	}
-
-	////Check the collide
-	//collideCheck();
-
 }
 void ClickBalloonLayer::updateBalloon(float dt){
-	//每秒20%概率产生新的气球
-	/*int rand = random() % 5;
-	if (rand == 0){
+	//每0.2秒60%概率产生新的气球
+	int rand = random() % 5;
+	if (rand < 3){
 		addNewBallon();
-	}*/
-	addNewBallon();
+	}
 }
 
 void ClickBalloonLayer::clickCheck(Touch *touch){
@@ -189,7 +120,6 @@ void ClickBalloonLayer::clickCheck(Touch *touch){
 		
 			if ((balloon->getPositionY() - balloon->getContentSize().height / 2)< touch->getLocation().y&&touch->getLocation().y < (balloon->getPositionY() + balloon->getContentSize().height / 2))
 			{
-				log("sccre:%d", balloon->getBallScore());
 				score += balloon->getBallScore();
 				char temp[64];		
 				sprintf(temp, "%d", score);
@@ -197,6 +127,13 @@ void ClickBalloonLayer::clickCheck(Touch *touch){
 				strcat(tmp, temp);
 				scoreLabel->setString(tmp);
 				removeBallon(balloon);
+				balloonClickSum++;
+				char temp2[64];
+				sprintf(temp2, "%d", balloonClickSum);
+				char tmp2[64] = "hits:";
+				strcat(tmp2, temp2);
+				balloonClickSumLabel->setString(tmp2);
+				break;
 			}
 		}
 	}
@@ -233,33 +170,36 @@ void ClickBalloonLayer::removeBallon(Node* sender){
 void ClickBalloonLayer::addNewBallon(){
 	int i = random() % 3;
 	if (i == 0){
-		auto ballon = BallActor::createWithType(BallActor::BallActorType::GoalBall);
+		auto balloon = BallActor::createWithType(BallActor::BallActorType::GoalBall);
+		//设定气球初速度
+		increaseSpeed(balloon);
 		//设置ballon初始位置
-		int tmp = 640 - ballon->getContentSize().width;
-		ballon->setPosition(Point(rand() % tmp + ballon->getContentSize().width / 2, 0));
-		ballon->setBallScore(1);
-		((GoalBallActor*)ballon)->activateBallMovement();
-		addChild(ballon, FISH_LAYER_ORDER);
-		ballActors.pushBack(ballon);
+		int tmp = 640 - balloon->getContentSize().width;
+		balloon->setPosition(Point(rand() % tmp + balloon->getContentSize().width / 2, 0));
+		balloon->setBallScore(1);
+		((GoalBallActor*)balloon)->activateBallMovement();
+		addChild(balloon);
+		ballActors.pushBack(balloon);
 	}
 	else if (i == 1){
-		auto ballon = BallActor::createWithType(BallActor::BallActorType::GoodBall);
+		auto balloon = BallActor::createWithType(BallActor::BallActorType::GoodBall);
+		increaseSpeed(balloon);
 		//设置ballon初始位置	
-		int tmp = 640 - ballon->getContentSize().width;
-		log("tmp:%d", tmp);
-		ballon->setPosition(Point(rand() % tmp+ballon->getContentSize().width/2, 0));
-		((GoalBallActor*)ballon)->activateBallMovement();
-		addChild(ballon, FISH_LAYER_ORDER);
-		ballActors.pushBack(ballon);
+		int tmp = 640 - balloon->getContentSize().width;
+		balloon->setPosition(Point(rand() % tmp + balloon->getContentSize().width / 2, 0));
+		((GoalBallActor*)balloon)->activateBallMovement();
+		addChild(balloon);
+		ballActors.pushBack(balloon);
 	}
 	else {
-		auto ballon = BallActor::createWithType(BallActor::BallActorType::BadBall);
+		auto balloon = BallActor::createWithType(BallActor::BallActorType::BadBall);
+		increaseSpeed(balloon);
 		//设置ballon初始位置
-		int tmp = 640 - ballon->getContentSize().width;
-		ballon->setPosition(Point(rand() % tmp + ballon->getContentSize().width / 2, 0));
-		((GoalBallActor*)ballon)->activateBallMovement();
-		addChild(ballon, FISH_LAYER_ORDER);
-		ballActors.pushBack(ballon);
+		int tmp = 640 - balloon->getContentSize().width;
+		balloon->setPosition(Point(rand() % tmp + balloon->getContentSize().width / 2, 0));
+		((GoalBallActor*)balloon)->activateBallMovement();
+		addChild(balloon);
+		ballActors.pushBack(balloon);
 	}
 
 	
@@ -272,10 +212,98 @@ void ClickBalloonLayer::updateBalloonMovement(){
 }
 void ClickBalloonLayer::updateTimeLabel(float dt)
 {
-	time--;
-	char temp[64];
-	sprintf(temp, "%d", time);
-	char tmp[64] = "time:";
-	strcat(tmp, temp);
-	timeLabel->setString(tmp);
+	time++;
+	speed = speed + 0.2;
+	//五次机会
+	if (miss <= 5){
+		char temp[64];
+		sprintf(temp, "%d", 5-miss);
+		char tmp[64] = "chance:";
+		strcat(tmp, temp);
+		timeLabel->setString(tmp);
+	}
+	else{
+		log("Game Over");
+		this->unschedule(schedule_selector(ClickBalloonLayer::updateTimeLabel));
+		_eventDispatcher->removeAllEventListeners();
+		auto director = Director::getInstance();
+		auto scene = director->getRunningScene();
+		auto layer = GameOverLayer::create();
+		//得分数
+		Label* finalScoreLabel = Label::createWithTTF("100", "fonts/BuxtonSketch.ttf", 60);
+		finalScoreLabel->setPosition(530, 560);
+		char temp[64];
+		sprintf(temp, "%d", score);
+		finalScoreLabel->setString(temp);
+		layer->addChild(finalScoreLabel);
+		//击中气球数
+		Label* balloonNumLabel = Label::createWithTTF("30", "fonts/BuxtonSketch.ttf", 60);
+		balloonNumLabel->setPosition(530, 480);
+		sprintf(temp, "%d", balloonClickSum);;
+		balloonNumLabel->setString(temp);
+		layer->addChild(balloonNumLabel);
+		//最好战绩
+		int bestScore = layer->getBestScore();
+		if (score > bestScore){
+			bestScore = score;
+			layer->setBestScore(bestScore);
+		}
+		char tempScore[64];
+		sprintf(tempScore, "%d", bestScore);
+		Label* bestScoreLabel = Label::createWithTTF(tempScore, "fonts/BuxtonSketch.ttf", 60);
+		bestScoreLabel->setPosition(530, 400);
+		layer->addChild(bestScoreLabel);
+
+
+
+		
+		//Create the reStart button of the game
+		auto reGameBtn = cocos2d::ui::Button::create("MainMenu/regame_btn.png");
+		reGameBtn->setScale(0.5);
+		reGameBtn->setPosition(Point(200, 300));
+		reGameBtn->addTouchEventListener([&](Ref* sender, cocos2d::ui::Widget::TouchEventType type){
+			//Create the scene of MenuScene with a transtionFadeBL effect
+			auto replaceScene = TransitionFade::create(2.0, ClickBalloonScene::createScene());
+
+			//Replace the scene with the trasition effect scene
+			Director::getInstance()->replaceScene(replaceScene);
+			switch (type) {
+			case cocos2d::ui::Widget::TouchEventType::BEGAN:
+				//TODO:Start game hereg
+				printf("click here");
+				break;
+			default:
+				break;
+			}
+		});
+		layer->addChild(reGameBtn);
+
+		//Create the start button of the game
+		auto exitGameBtn = cocos2d::ui::Button::create("MainMenu/exit_btn.png");
+		exitGameBtn->setScale(0.5);
+		exitGameBtn->setPosition(Point(400, 300));
+		exitGameBtn->addTouchEventListener([&](Ref* sender, cocos2d::ui::Widget::TouchEventType type){
+
+			//Create the scene of MenuScene with a transtionFadeBL effect
+			auto replaceScene = TransitionFade::create(2.0, MainMenuScene::createScene());
+
+			//Replace the scene with the trasition effect scene
+			Director::getInstance()->replaceScene(replaceScene);
+			switch (type) {
+			case cocos2d::ui::Widget::TouchEventType::BEGAN:
+			//TODO:Start game hereg
+			printf("click here");
+
+				break;
+			default:
+				break;
+			}
+		});
+		layer->addChild(exitGameBtn);
+		scene->addChild(layer, 200);
+		
+	}
+}
+void ClickBalloonLayer::increaseSpeed(BallActor* balloon){
+	balloon->setSpeedY(balloon->getSpeedY() + speed);
 }

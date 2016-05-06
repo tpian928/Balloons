@@ -59,7 +59,7 @@ bool GoalBallActor::init(){
 	BallActor::init();
 
 	setSpeedX(1.0f);
-	setSpeedY(2.0f);
+	setSpeedY(1.0f);
 
 	
 	ballType = BallActorType::GoalBall;
@@ -110,7 +110,7 @@ bool BadBallActor::init(){
 	BallActor::init();
 
 	setSpeedX(1.5f);
-	setSpeedY(3.0f);
+	setSpeedY(2.0f);
 
 
 	ballType = BallActorType::BadBall;
@@ -159,7 +159,7 @@ bool GoodBallActor::init(){
 	BallActor::init();
 
 	setSpeedX(2.0f);
-	setSpeedY(5.0f);
+	setSpeedY(3.0f);
 
 	ballType = BallActorType::GoodBall;
 

@@ -1,9 +1,5 @@
 //
-//  FishingScene.cpp
-//  FishJoyMini
-//
-//  Created by Ken on 14-3-11.
-//
+//  ClickBalloonScene.cpp
 //
 
 #include "ClickBalloonScene.h"
@@ -16,10 +12,8 @@ Scene* ClickBalloonScene::createScene()
 
 	// 'layer' is an autorelease object
 	auto layer = ClickBalloonLayer::create();
-
 	// add layer as a child to scene
-	scene->addChild(layer);
-
+	scene->addChild(layer,100);
 	// return the scene
 	return scene;
 }

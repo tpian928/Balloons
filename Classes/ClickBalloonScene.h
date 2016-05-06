@@ -1,5 +1,5 @@
 //
-//  FishingScene.h
+//  ClickBalloonScene.h
 //
 //  Created by ShuXinsheng on 16-4-2.
 //
@@ -10,7 +10,7 @@
 
 #include "cocos2d.h"
 #include "ClickBalloonLayer.h"
-
+#include "GameOverLayer.h"
 USING_NS_CC;
 
 class ClickBalloonScene : public Layer{

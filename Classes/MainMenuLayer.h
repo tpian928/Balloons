@@ -1,9 +1,5 @@
 ﻿//
 //  MainMenuLayer.h
-//  FishJoyMini
-//
-//  Created by Ken on 14-3-6.
-//
 //
 #include "MainMenuScene.h"
 //#include "FishActor.h"

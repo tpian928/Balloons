@@ -1,9 +1,5 @@
 //
-//  FishingLayer.h
-//  FishJoyMini
-//
-//  Created by Ken on 14-3-11.
-//
+//  ClickBalloonLayer.h
 //
 
 #ifndef Ballon_ClickBalloonLayer_h
@@ -12,6 +8,7 @@
 #include "BallActor.h"
 #include <cstdlib>
 #include "MainMenuLayer.h"
+#include "GameOverLayer.h"
 
 #include "SimpleAudioEngine.h"
 #include "ui/CocosGUI.h"
@@ -33,13 +30,15 @@ protected:
 
 	Sprite* gamebar;
 	Label* timeLabel;
-	Label* roundLabel;
+	Label* balloonClickSumLabel;
 	Label* scoreLabel;
 
 	int score;
 	int time;
-	int round;
+	int balloonClickSum;
+	int miss;
 
+	float speed;
 
 	virtual void update(float delta);
 	void updateBalloon(float dt);
@@ -57,6 +56,7 @@ protected:
 
 	void updateBalloonMovement();
 	void updateTimeLabel(float dt);
+	void increaseSpeed(BallActor* balloon);
 };
 
 #endif
